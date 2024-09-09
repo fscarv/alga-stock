@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './TesteComponente.css'
 
 function TesteComponente (props: {name: string}) {
 
-    const [age, setAge] = useState(21)
+    const [age, setAge] = useState(1)
+    
+    useEffect(() => {
+        console.log('Componente foi criado')
+    }, [])
+
+    useEffect(() => {
+        console.log('Componente atualizado para: ' + age)
+    }, [age])
 
 return <div className='TesteComponente'>
     Olá, {props.name}, {age}

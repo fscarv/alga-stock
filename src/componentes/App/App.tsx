@@ -1,25 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import TesteComponente from '../TesteComponente';
-// import ClassComponente from '../ClassComponente';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <TesteComponente name='Fernando'/>
-        {/* <ClassComponente name='Mundo' /> */}
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      App
     </div>
   );
 }

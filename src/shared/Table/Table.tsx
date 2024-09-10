@@ -1,31 +1,30 @@
 import React from "react";
 import './Table.scss';
+import Products from './Table.mockdata'
+
+const headers = [
+    {key: 'name', value: 'Product'},
+    {key: 'price', value: 'Price'},
+    {key: 'stock', value: 'Available Stock'},
+]
 
 const Table = () => {
     return <table className="AppTable">
         <thead>
             <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th className="right">Stock</th>
+                {
+                    headers.map((header, index) => <th key={ index }>{ header.value }</th>)
+                }
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Cookie</td>
-                <td>$0.99</td>
-                <td className="right">50</td>
-            </tr>
-            <tr>
-                <td>Milk 1L</td>
-                <td>$1.99</td>
-                <td className="right">20</td>
-            </tr>
-            <tr>
-                <td>Bread</td>
-                <td>$0.99</td>
-                <td className="right">100</td>
-            </tr>
+            {
+                Products.map((product) => <tr key={ product.id }>
+                <td>{ product.name }</td>
+                <td>${ product.price }</td>
+                <td className="right">{ product.stock }</td>
+                </tr>)
+            }
         </tbody>
     </table>
 }

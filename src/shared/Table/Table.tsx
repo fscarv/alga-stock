@@ -25,7 +25,14 @@ const Table: React.FC<TableProps> = (props) => {
         <thead>
             <tr>
                 {
-                    props.headers.map((header) => <th className={ header.right ? 'right' : ''} key={ header.key }>{ header.value }</th>)
+                    props.headers.map((header) =>
+                        <th
+                            className={header.right ? 'right' : ''}
+                            key={header.key}
+                        >
+                            {header.value}
+                        </th>
+                    )
                 }
             </tr>
         </thead>
@@ -35,16 +42,17 @@ const Table: React.FC<TableProps> = (props) => {
                     return <tr key={i}>
                         {
                             Object
-                            .keys(row)
-                            .map(item =>
-                                item !== '$original'
-                                ? <td 
-                                key={row.$original.id + i}
-                                className={indexedHeaders[item].right ? 'right' : ''}>
-                                { row[item] }
-                            </td>
-                            : null
-                            )
+                                .keys(row)
+                                .map((item, i) =>
+                                    item !== '$original'
+                                        ? <td
+                                            key={row.$original.id + i}
+                                            className={indexedHeaders[item].right ? 'right' : ''}
+                                        >
+                                            {row[item]}
+                                        </td>
+                                        : null
+                                )
                         }
                     </tr>
                 })

@@ -2,7 +2,7 @@ import React from "react"
 import './Header.css'
 
 declare interface HeaderProps {
-    title: String
+    title: string
 }
 
 const Header: React.FC<HeaderProps> = (props) => {

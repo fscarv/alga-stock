@@ -5,7 +5,7 @@ import Container from '../../shared/Container';
 import Table, { TableHeader } from '../../shared/Table';
 import Products, { Product } from '../../shared/Table/Table.mockdata';
 import ProductForm, { ProductCreator } from '../Products/ProductForm';
-import FormWithInfoIcon from '../../shared/Button/InfoIcon';
+import FormWithInfoIcon from '../../utils/InfoIcon';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -20,6 +20,7 @@ const headers: TableHeader[] = [
 
 function App() {
   const [products, setProducts] = useState(Products)
+  const [updatingProducts, setUpdatingProducts] = useState<Product | undefined>(products[0])
 
   const handleProductSubmit = (product: ProductCreator) => {
     setProducts([
@@ -37,6 +38,8 @@ function App() {
         ? newProduct
         : product
     ))
+
+    setUpdatingProducts(undefined)
   }
 
   return (
@@ -48,7 +51,7 @@ function App() {
           data={products}
         />
         <ProductForm
-          form={products[0]}
+          form={updatingProducts}
           onSubmit={handleProductSubmit}
           onUpdate={handleProductUpdate}
         />

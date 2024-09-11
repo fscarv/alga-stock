@@ -13,9 +13,10 @@ const FormWithInfoIcon = () => {
       <label htmlFor="inputEmail" className="form-label">
         Email address
         <i
-        className="bi bi-info-circle ms-2"
+        className="bi bi-question-circle-fill ms-1"
         data-bs-toggle="tooltip"
-        title="Digite o seu melhor email.">
+        title="Digite o seu melhor email."
+        style={{ fontSize: '12px', cursor: 'pointer', verticalAlign: 'middle' }}>
         </i>
       </label>
       <input

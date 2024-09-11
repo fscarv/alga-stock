@@ -3,8 +3,13 @@ import './App.css';
 import Header from '../Header';
 import Container from '../../shared/Container';
 import Table, { TableHeader } from '../../shared/Table';
-import Products from '../../shared/Table/Table.mockdata';
+import Products, { Product } from '../../shared/Table/Table.mockdata';
 import ProductForm, { ProductCreator } from '../Products/ProductForm';
+import FormWithInfoIcon from '../../shared/Button/InfoIcon';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 const headers: TableHeader[] = [
   { key: 'id', value: '#' },
@@ -16,15 +21,23 @@ const headers: TableHeader[] = [
 function App() {
   const [products, setProducts] = useState(Products)
 
-const handleProductSubmit = (product: ProductCreator) => {
-  setProducts([
-    ...products, 
-    {
-      id: products.length + 1,
-      ...product
-    }
-  ])
-}
+  const handleProductSubmit = (product: ProductCreator) => {
+    setProducts([
+      ...products,
+      {
+        id: products.length + 1,
+        ...product
+      }
+    ])
+  }
+
+  const handleProductUpdate = (newProduct: Product) => {
+    setProducts(products.map(product =>
+      product.id === newProduct.id
+        ? newProduct
+        : product
+    ))
+  }
 
   return (
     <div className="App">
@@ -32,11 +45,14 @@ const handleProductSubmit = (product: ProductCreator) => {
       <Container>
         <Table
           headers={headers}
-          data={Products}
+          data={products}
         />
-        <ProductForm 
+        <ProductForm
+          form={products[0]}
           onSubmit={handleProductSubmit}
+          onUpdate={handleProductUpdate}
         />
+        <FormWithInfoIcon />
       </Container>
     </div>
   );

@@ -59,6 +59,7 @@ function App() {
     }).then((result) => {
       if (result.isConfirmed) {
         deleteProduct(product.id)
+        setUpdatingProducts(undefined)
         Swal.fire({
           title: "Deleted!",
           text: "Your file has been deleted.",

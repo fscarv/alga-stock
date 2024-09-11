@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+
 import './App.css';
 import Header from '../Header';
 import Container from '../../shared/Container';
@@ -9,7 +11,6 @@ import FormWithInfoIcon from '../../utils/InfoIcon';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
 
 const headers: TableHeader[] = [
   { key: 'id', value: '#' },
@@ -42,6 +43,43 @@ function App() {
     setUpdatingProducts(undefined)
   }
 
+  const deleteProduct = (id: number) => {
+    setProducts(products.filter(product => product.id !== id))
+  }
+
+  const handleProductDelete = (product: Product) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#09f",
+      cancelButtonColor: "#d33",
+      confirmButtonText: `Yes, delete ${product.name}!`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteProduct(product.id)
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success"
+        });
+      }
+    });
+  }
+
+  const handleProductDetail = (product: Product) => {
+    Swal.fire({
+      title: "Product details",
+      text: `${product.name} costs $${product.price} and we have ${product.stock} available in stock.`,
+      icon: "info"
+    });
+  }
+
+  const handleProductEdit = (product: Product) => {
+    setUpdatingProducts(product)
+  }
+
   return (
     <div className="App">
       <Header title="AlgaStock" />
@@ -50,9 +88,9 @@ function App() {
           headers={headers}
           data={products}
           enableActions={true}
-          onDelete={console.log}
-          onDetail={console.log}
-          onEdit={console.log}
+          onDelete={handleProductDelete}
+          onDetail={handleProductDetail}
+          onEdit={handleProductEdit}
         />
         <ProductForm
           form={updatingProducts}
@@ -66,3 +104,4 @@ function App() {
 }
 
 export default App;
+ 

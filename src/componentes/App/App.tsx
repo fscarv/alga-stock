@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
 import './App.css';
 import Header from '../Header';
 import Container from '../../shared/Container';
 import Table, { TableHeader } from '../../shared/Table';
-import Products, { Product } from '../../shared/Table/Table.mockdata';
+import { Product } from '../../shared/Table/Table.mockdata';
 import ProductForm, { ProductCreator } from '../Products/ProductForm';
 import FormWithInfoIcon from '../../utils/InfoIcon';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import { getAllProducts } from '../../service/Products.service';
 
 const headers: TableHeader[] = [
   { key: 'id', value: '#' },
@@ -20,8 +21,19 @@ const headers: TableHeader[] = [
 ]
 
 function App() {
-  const [products, setProducts] = useState(Products)
-  const [updatingProducts, setUpdatingProducts] = useState<Product | undefined>(products[0])
+  const [products, setProducts] = useState<Product[]>([])
+  const [updatingProducts, setUpdatingProducts] = useState<Product | undefined>(undefined)
+
+  useEffect(() => {
+    async function fetchData(){
+      const _products = await getAllProducts()
+      setProducts(_products)
+    }
+
+    fetchData()
+  }, [])
+
+  getAllProducts().then(console.log)
 
   const handleProductSubmit = (product: ProductCreator) => {
     setProducts([

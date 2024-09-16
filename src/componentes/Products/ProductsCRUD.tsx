@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Table, { TableHeader } from "../../shared/Table";
-import {  
-    deleteSingleProduct,    
-    updateSingleProduct } from "../../service/Products.service";
+import {
+    deleteSingleProduct,
+    updateSingleProduct
+} from "../../service/Products.service";
 import { Product } from "../../shared/Table/Table.mockdata";
 import ProductForm, { ProductCreator } from "./ProductForm";
 import Swal from "sweetalert2";
@@ -27,8 +28,13 @@ const ProductsCRUD: React.FC<ProductsCRUDprops> = (props) => {
     const [updatingProducts, setUpdatingProducts] = useState<Product | undefined>(undefined)
 
     async function fetchData() {
-        // @ts-ignore
-        dispatch(getProducts())
+        try {
+            // @ts-ignore
+            await dispatch(getProducts())
+            Swal.fire('Success!', 'Fetch done', 'success');
+        } catch (err: any) {
+            Swal.fire('Oops!', err.message, 'error');
+        }
     }
 
     useEffect(() => {

@@ -1,9 +1,10 @@
 
-import { Action } from "./Products.reducer"
+import { Action, Thunk } from ".."
 import { ProductCreator } from "../../componentes/Products/ProductForm"
 import { getAllProducts } from "../../service/Products.service"
+import { Product } from "../../shared/Table/Table.mockdata"
 
-export const getProducts = () => async (dispatch: any) => {
+export const getProducts = (): Thunk<Product[]> => async (dispatch) => {
     const products = await getAllProducts()
     dispatch ({
         type: 'FETCH_PRODUCTS',

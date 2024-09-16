@@ -6,7 +6,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import ProductsCRUD from '../Products/ProductsCRUD';
 
-
 function App() {
     return (
     <div className="App">

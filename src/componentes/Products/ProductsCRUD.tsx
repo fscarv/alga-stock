@@ -21,52 +21,43 @@ declare interface ProductsCRUDprops {
 
 const ProductsCRUD: React.FC<ProductsCRUDprops> = (props) => {
     const dispatch = useDispatch()
-    //const [products, setProducts] = useState<Product[]>([])
-    const [updatingProducts, setUpdatingProducts] = useState<Product | undefined>(undefined)
 
-    async function fetchData() {
-        try {
-            // @ts-ignore
-            await dispatch(ProductActions.getProducts())
-            // Swal.fire('Success!', 'Fetch done', 'success');
-        } catch (err: any) {
-            Swal.fire('Oops!', err.message, 'error');
-        }
-    }
+    const showErrorAlert = (err: Error) => Swal.fire('Oops!', err.message, 'error');
+
+    const [updatingProducts, setUpdatingProducts] = useState<Product | undefined>(undefined)
 
     useEffect(() => {
         fetchData()
     }, [])
 
+    async function fetchData() {
+        // @ts-ignore
+        dispatch(ProductActions.getProducts())
+            .catch(showErrorAlert)
+    }
+
     const handleProductSubmit = async (product: ProductCreator) => {
-        try {
-            // @ts-ignore
-            dispatch(ProductActions.insertNewProduct(product))
-        } catch (err: any) {
-            Swal.fire('Oops!', err.message, 'error');
-        }
+        // @ts-ignore
+        dispatch(ProductActions.insertNewProduct(product))
+            .catch(showErrorAlert)
     }
 
     const handleProductUpdate = async (newProduct: Product) => {
-        try {
-            // @ts-ignore
-            await dispatch(ProductActions.updateProduct(newProduct))
-            setUpdatingProducts(undefined)
-        } catch (err: any) {
-            if (err instanceof Error) {
-                Swal.fire('Oops!', err.message, 'error');
-            }
-        }
+
+        // @ts-ignore
+        dispatch(ProductActions.updateProduct(newProduct))
+            .then(() => setUpdatingProducts(undefined))
+            .catch(showErrorAlert)
     }
 
     const deleteProduct = async (id: string) => {
-        try {
-            // @ts-ignore
-            await dispatch(ProductActions.deleteProduct(id))
-            Swal.fire('Deleted!', 'Product has been deleted.', 'success')
-        } catch (err: any) {
-            Swal.fire('Oops!', err.message, 'error');
-        }
+        // @ts-ignore
+        dispatch(ProductActions.deleteProduct(id))
+            .then(() => {
+                Swal.fire('Deleted!', 'Product has been deleted.', 'success')
+            })
+            .catch(showErrorAlert)
+        setUpdatingProducts(undefined)
     }
 
     const handleProductDelete = (product: Product) => {
@@ -78,11 +69,7 @@ const ProductsCRUD: React.FC<ProductsCRUDprops> = (props) => {
             confirmButtonColor: "#09f",
             cancelButtonColor: "#d33",
             confirmButtonText: `Yes, delete ${product.name}!`
-        }).then((result: any) => {
-            if (result.isConfirmed) {
-                deleteProduct(product._id)
-            }
-        });
+        }).then(({ value }) => value && deleteProduct(product._id))
     }
 
     const handleProductDetail = (product: Product) => {
@@ -93,10 +80,6 @@ const ProductsCRUD: React.FC<ProductsCRUDprops> = (props) => {
         });
     }
 
-    const handleProductEdit = (product: Product) => {
-        setUpdatingProducts(product)
-    }
-
     return <>
         <Table
             headers={headers}
@@ -104,7 +87,7 @@ const ProductsCRUD: React.FC<ProductsCRUDprops> = (props) => {
             enableActions={true}
             onDelete={handleProductDelete}
             onDetail={handleProductDetail}
-            onEdit={handleProductEdit}
+            onEdit={setUpdatingProducts}
         />
         <ProductForm
             form={updatingProducts}

@@ -8,7 +8,7 @@ import ProductForm, { ProductCreator } from "./ProductForm";
 import Swal from "sweetalert2";
 import FormWithInfoIcon from "../../utils/InfoIcon";
 import { connect, useDispatch } from "react-redux";
-import { insertNewProduct } from "../../redux/Products/Products.actions";
+import { getProducts, insertNewProduct } from "../../redux/Products/Products.actions";
 
 const headers: TableHeader[] = [
     { key: 'id', value: '#' },
@@ -27,8 +27,8 @@ const ProductsCRUD: React.FC<ProductsCRUDprops> = (props) => {
     const [updatingProducts, setUpdatingProducts] = useState<Product | undefined>(undefined)
 
     async function fetchData() {
-        //const _products = await getAllProducts()
-        //setProducts(_products)
+        // @ts-ignore
+        dispatch(getProducts())
     }
 
     useEffect(() => {

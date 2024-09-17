@@ -5,14 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import HomeView from '../../views/HomeView';
+import NotFoundView from '../../views/NotFoundView';
 
 function App() {
     return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomeView />}>
-          </Route>
+          <Route path="/" element={<HomeView />} />
+          <Route path="*" element={<NotFoundView />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -6,6 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import HomeView from '../../views/HomeView';
 import NotFoundView from '../../views/NotFoundView';
+import LoginView from '../../views/LoginView';
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomeView />} />
+          <Route path='/login' element={<LoginView />} />
           <Route path="*" element={<NotFoundView />} />
         </Routes>
       </BrowserRouter>

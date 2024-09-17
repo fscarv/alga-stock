@@ -1,5 +1,5 @@
 import { Action } from "..";
-import { User } from "../../service/Authentication.service";
+import { User } from "../../service/authentication.service";
 
 declare interface AutheticationState {
     profile?: User

@@ -1,5 +1,5 @@
 import { Thunk } from "..";
-import { signInUser } from "../../service/Authentication.service";
+import { signInUser } from "../../service/authentication.service";
 
 
 declare interface Credentials {

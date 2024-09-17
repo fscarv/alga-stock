@@ -7,6 +7,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import HomeView from '../../views/HomeView';
 import NotFoundView from '../../views/NotFoundView';
 import LoginView from '../../views/LoginView';
+import ProfileView from '../../views/ProfileView';
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeView />} />
           <Route path='/login' element={<LoginView />} />
+          <Route path='/profile' element={<ProfileView />} />
           <Route path="*" element={<NotFoundView />} />
         </Routes>
       </BrowserRouter>

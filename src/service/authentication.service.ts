@@ -1,6 +1,6 @@
 import http from "../utils/http";
 
-declare interface User {
+export interface User {
     _id: string
     user: string
     email: string

@@ -1,18 +1,20 @@
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Header from '../Header';
-import Container from '../../shared/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import ProductsCRUD from '../Products/ProductsCRUD';
+import HomeView from '../../views/HomeView';
 
 function App() {
     return (
     <div className="App">
-      <Header title="AlgaStock" />
-      <Container>
-        <ProductsCRUD />
-      </Container>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomeView />}>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

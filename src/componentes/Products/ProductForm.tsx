@@ -3,7 +3,6 @@ import Form from "../../shared/Form";
 import Input from "../../shared/Input";
 import Button from "../../shared/Button";
 import { Product } from "../../shared/Table/Table.mockdata";
-import withPermission from "../../utils/HOC/withPermission";
 
 declare interface InitialFormState {
     _id?: string
@@ -42,6 +41,7 @@ const ProductForm: React.FC<ProductFormProps> = (props) => {
 
     useEffect(() => {
         setForm(initialFormState)
+        // eslint-disable-next-line
     }, [props.form])
 
     const handInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

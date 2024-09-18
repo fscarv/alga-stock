@@ -5,6 +5,7 @@ declare interface AutheticationState {
     profile?: User
 }
 
+// eslint-disable-next-line
 export default function (state: AutheticationState = {}, action: Action): AutheticationState {
     switch(action.type) {
         case 'AUTHETICATION_LOGIN':

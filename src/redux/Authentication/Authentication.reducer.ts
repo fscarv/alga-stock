@@ -8,11 +8,11 @@ declare interface AutheticationState {
 // eslint-disable-next-line
 export default function (state: AutheticationState = {}, action: Action): AutheticationState {
     switch(action.type) {
-        case 'AUTHETICATION_LOGIN':
+        case 'AUTHENTICATION_LOGIN':
             return {
                 profile: action.payload
             }
-        case 'AUTHETICATION_LOGOUT':
+        case 'AUTHENTICATION_LOGOUT':
             return {
                 
             }
